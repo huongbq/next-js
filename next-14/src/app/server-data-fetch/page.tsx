@@ -4,7 +4,6 @@ import React from "react";
 
 export default async function ServerSideDataFetching() {
   const listOfUsers = await fetchListOfUsers();
-  console.log([listOfUsers]);
   return (
     <div className="p-10">
       <h1>Server side data fetching : User List Page</h1>

@@ -4,11 +4,7 @@ import React from "react";
 export default async function UserDetails({ params }: any) {
   const userDetails = await fetchUserDetails(params.details);
 
-  if (!userDetails) {
-    return <div>Error loading user details</div>;
-  }
-
-  return (
+  return userDetails ? (
     <div>
       <h1>
         {userDetails?.firstName} {userDetails?.lastName}
@@ -16,5 +12,7 @@ export default async function UserDetails({ params }: any) {
       <h1>{userDetails?.age}</h1>
       <h1>{userDetails?.email}</h1>
     </div>
+  ) : (
+    <div>Error loading user details</div>
   );
 }
