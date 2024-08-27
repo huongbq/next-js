@@ -10,8 +10,11 @@ export default function Home() {
     router.push("/products/1234");
   };
   return (
-    <main className="flex flex-col gap-5 items-center justify-between p-24">
+    <main className="h-full flex flex-col gap-5 items-center justify-between p-24 bg-gradient-to-r from-yellow-500 to-red-500">
       <h1 className=" font-bold text-xl">Welcome to the next JS app</h1>
+      <Link href={"blogs"} className="bg-green-500 p-5 rounded-full text-white">
+        View blog overview
+      </Link>
       <Link
         href={"/recipe-list"}
         className="p-5 rounded-full text-white bg-rose-600">
