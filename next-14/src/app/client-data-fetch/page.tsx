@@ -11,16 +11,11 @@ export default function ClientSideDataFetching() {
     fetcher
   );
 
-  if (error) {
-    return <h1>Fail to load</h1>;
-  }
-
-  if (isLoading)
-    return (
-      <h3 className="font-bold text-green-300">loading user! PLEASE WAIT</h3>
-    );
-
-  return (
+  return error ? (
+    <h1>Fail to load</h1>
+  ) : isLoading ? (
+    <h3 className="font-bold text-green-300">loading user! PLEASE WAIT</h3>
+  ) : (
     <div>
       <h1>Client-side Data Fetching</h1>
       <div>

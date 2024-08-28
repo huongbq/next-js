@@ -11,11 +11,11 @@ export default function Home() {
   };
   return (
     <main className="flex flex-col gap-5 items-center justify-between p-24">
-      <h1>Welcome to the next JS app</h1>
+      <h1 className=" font-bold text-xl">Welcome to the next JS app</h1>
       <Link
-        href="/products"
-        className="bg-purple-300 p-5 rounded-full text-white">
-        View Products
+        href={"/recipe-list"}
+        className="p-5 rounded-full text-white bg-rose-600">
+        go to Recipe list
       </Link>
       <Link
         href="/accounts"
@@ -23,18 +23,23 @@ export default function Home() {
         View Accounts
       </Link>
       <Link
+        href="/products"
+        className="bg-purple-300 p-5 rounded-full text-white">
+        View Products
+      </Link>
+      <Link
         href="/profile"
         className="bg-yellow-400 p-5 rounded-full text-white">
         View profile
       </Link>
-      <Link href="/cart" className="bg-red-400 p-5 rounded-full text-white">
-        View cart
-      </Link>
       <button
         className="bg-blue-400 p-5 rounded-full text-white"
         onClick={handleNavigate}>
-        view detail
+        View detail
       </button>
+      <Link href="/cart" className="bg-red-400 p-5 rounded-full text-white">
+        View cart
+      </Link>
     </main>
   );
 }
