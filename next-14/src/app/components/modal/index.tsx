@@ -16,6 +16,7 @@ export interface ConfirmModalProps {
   hideFooter?: boolean;
   blogFormData: IBlogProps;
   setBlogFormData: Dispatch<SetStateAction<IBlogProps>>;
+  setCurrentEditBlogId: Dispatch<SetStateAction<string | null>>;
 }
 
 export interface ConfirmProps extends ConfirmModalProps {
@@ -34,6 +35,7 @@ export function ConfirmModal({
   hideFooter,
   blogFormData,
   setBlogFormData,
+  setCurrentEditBlogId,
 }: ConfirmProps) {
   const { handleSubmit } = useForm<IBlogProps>({
     mode: "all",
@@ -87,6 +89,7 @@ export function ConfirmModal({
               title: "",
               description: "",
             });
+            setCurrentEditBlogId(null);
           })}>
           <div>
             <label htmlFor="title">Title: </label>

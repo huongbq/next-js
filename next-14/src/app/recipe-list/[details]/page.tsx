@@ -1,9 +1,10 @@
-import fetchRecipeDetails from "@/services/getRecipeDetail";
+import UserServices from "@/services/getUser";
 import Link from "next/link";
 import React from "react";
 
 export default async function UserDetails({ params }: any) {
-  const recipeDetails = await fetchRecipeDetails(params.details);
+  const response = await UserServices.getRecipeDetail(params.details);
+  const recipeDetails = response.data;
 
   return recipeDetails ? (
     <div className="p-10 mx-auto">
