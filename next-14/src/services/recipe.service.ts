@@ -1,7 +1,13 @@
-import { AxiosResponse } from "axios";
-import { axiosUser } from "./request";
+import axios, { AxiosResponse } from "axios";
 
-const UserServices = {
+export const axiosUser = axios.create({
+  baseURL: process.env.URL_USER,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+const RecipeServices = {
   getUsers(params: object = {}): Promise<AxiosResponse<any>> {
     return axiosUser.get("/users", { params });
   },
@@ -16,4 +22,4 @@ const UserServices = {
   },
 };
 
-export default UserServices;
+export default RecipeServices;

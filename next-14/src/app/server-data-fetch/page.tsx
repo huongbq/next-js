@@ -1,4 +1,4 @@
-import UserServices from "@/services/getUser";
+import Services from "@/services/recipe.service";
 import Link from "next/link";
 import React from "react";
 // import useSWR from "swr";
@@ -10,7 +10,7 @@ export default async function ServerSideDataFetching() {
   //   fetcher
   // );
   try {
-    const response = await UserServices.getUsers();
+    const response = await Services.getUsers();
     const listOfUsers = response.data;
 
     return (

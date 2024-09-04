@@ -1,9 +1,9 @@
-import UserServices from "@/services/getUser";
+import Services from "@/services/recipe.service";
 import Link from "next/link";
 import React from "react";
 
 export default async function UserDetails({ params }: any) {
-  const response = await UserServices.getRecipeDetail(params.details);
+  const response = await Services.getRecipeDetail(params.details);
   const recipeDetails = response.data;
 
   return recipeDetails ? (
