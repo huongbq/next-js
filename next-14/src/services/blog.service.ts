@@ -1,13 +1,13 @@
-import { axiosBlog } from "./request";
+import axiosInstance from "@/utils/axiosInstance";
 import { IBlogProps } from "@/app/components/blog-overview";
 
 const BlogServices = {
   async getBlogs(params: object = {}): Promise<IBlogProps[]> {
-    const response = await axiosBlog.get("/api/get-blogs", { params });
+    const response = await axiosInstance.get("/api/get-blogs", { params });
     return response.data;
   },
   deleteBlogById(id: string) {
-    return axiosBlog.delete(`/api/get-blog/${id}`);
+    return axiosInstance.delete(`/api/get-blog/${id}`);
   },
 };
 
