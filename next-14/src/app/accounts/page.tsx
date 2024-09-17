@@ -1,13 +1,16 @@
+"use client";
+
 import React from "react";
-import Link from "next/link";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 export default function AccountsPage() {
   return (
     <div className="flex flex-col w-96 p-10 justify-between items-center gap-3">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>Accounts</Breadcrumb.Item>
+      </Breadcrumb>
       <h1>Accounts Page</h1>
-      <Link href="/" className="bg-green-400 p-5 rounded-full">
-        Back Home
-      </Link>
     </div>
   );
 }

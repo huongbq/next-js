@@ -1,12 +1,20 @@
 "use client";
 
 import { jwtDecode } from "jwt-decode";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Card from "react-bootstrap/Card";
 
 export default function Home() {
   const router = useRouter();
+  const variants = [
+    { id: 1, name: "Dark", title: "Cart", link: "/cart" },
+    { id: 2, name: "Light", title: "Profile", link: "/profile" },
+    { id: 3, name: "Info", title: "Products", link: "/products" },
+    { id: 4, name: "Warning", title: "Account", link: "/accounts" },
+    { id: 5, name: "Secondary", title: "Recipes", link: "recipe-list" },
+    { id: 6, name: "Primary", title: "Blogs", link: "/blogs" },
+  ];
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,54 +36,26 @@ export default function Home() {
     }
   }, [router]);
 
-  const handleNavigate = () => {
-    router.push("/products/1234");
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    router.refresh();
-  };
-
   return (
-    <main className="h-full flex flex-col gap-5 items-center justify-between p-24 bg-gradient-to-r from-yellow-500 to-red-500">
-      <h1 className=" font-bold text-xl">Welcome to the next JS app</h1>
-      <button
-        onClick={handleLogout}
-        className="bg-orange-400 p-5 rounded-full text-white">
-        Log out
-      </button>
-      <Link href={"blogs"} className="bg-green-500 p-5 rounded-full text-white">
-        View blog overview
-      </Link>
-      <Link
-        href={"/recipe-list"}
-        className="p-5 rounded-full text-white bg-rose-600">
-        go to Recipe list
-      </Link>
-      <Link
-        href="/accounts"
-        className="bg-slate-400 p-5 rounded-full text-white">
-        View Accounts
-      </Link>
-      <Link
-        href="/products"
-        className="bg-purple-300 p-5 rounded-full text-white">
-        View Products
-      </Link>
-      <Link
-        href="/profile"
-        className="bg-yellow-400 p-5 rounded-full text-white">
-        View profile
-      </Link>
-      <button
-        className="bg-blue-400 p-5 rounded-full text-white"
-        onClick={handleNavigate}>
-        View detail
-      </button>
-      <Link href="/cart" className="bg-red-400 p-5 rounded-full text-white">
-        View cart
-      </Link>
+    <main className="flex gap-4 items-center p-20">
+      {variants.map((variant) => (
+        <Card
+          bg={variant.name.toLowerCase()}
+          key={variant.id}
+          onClick={() => router.push(variant.link)}
+          text={variant.name.toLowerCase() === "light" ? "dark" : "white"}
+          style={{ width: "18rem" }}
+          className="mb-2 cursor-pointer">
+          <Card.Header>{variant.title}</Card.Header>
+          <Card.Body>
+            <Card.Title>{variant.title} Card</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the {`card's`} content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
     </main>
   );
 }

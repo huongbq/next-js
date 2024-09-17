@@ -36,7 +36,7 @@ export const Modal = ({
           // leave="ease-in duration-200"
           leaveFrom="opacity-100"
           leaveTo="opacity-0">
-          <div className="fixed inset-0 bg-black bg-opacity-60" />
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-60" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">

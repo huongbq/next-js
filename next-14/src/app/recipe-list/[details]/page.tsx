@@ -1,6 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
+"use client";
+
 import Services from "@/services/recipe.service";
 import Link from "next/link";
 import React from "react";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 export default async function UserDetails({ params }: any) {
   const response = await Services.getRecipeDetail(params.details);
@@ -8,6 +12,11 @@ export default async function UserDetails({ params }: any) {
 
   return recipeDetails ? (
     <div className="p-10 mx-auto">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/recipe-list">Recipe</Breadcrumb.Item>
+        <Breadcrumb.Item active>Recipe detail</Breadcrumb.Item>
+      </Breadcrumb>
       <div className="mb-10">
         <Link
           href={"/recipe-list"}

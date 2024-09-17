@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { ConfirmModal } from "../modal";
 import { Card } from "react-bootstrap";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 export interface IBlogProps {
   _id?: string;
@@ -103,6 +104,10 @@ function BlogOverView({ blogList }: BlogOverViewProps) {
 
   return (
     <div className="min-h-screen flex flex-col gap-10 bg-gradient-to-r from-green-300 to-yellow-300 p-6 relative text-white">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>Blog</Breadcrumb.Item>
+      </Breadcrumb>
       <h1 className="uppercase font-bold text-center text-3xl">
         Blog Overview
       </h1>
