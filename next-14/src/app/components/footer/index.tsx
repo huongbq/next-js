@@ -13,7 +13,7 @@ function Footer() {
   ];
 
   return (
-    <div className="flex gap-3 p-10">
+    <div className="flex gap-3 p-10 border-t">
       {variants.map((variant) => (
         <Card
           bg={variant.name.toLowerCase()}

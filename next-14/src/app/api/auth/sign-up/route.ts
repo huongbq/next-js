@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     await user.save();
 
-    if (!process.env.JWT_SECRET) {
+    if (!process.env.NEXT_PUBLIC_JWT_SECRET) {
       return NextResponse.json(
         { msg: "JWT secret is not set" },
         { status: 500 }
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
 
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET as string,
+      process.env.NEXT_PUBLIC_JWT_SECRET as string,
       {
         expiresIn: "1h",
       }
