@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -35,7 +35,7 @@ axiosInstance.interceptors.response.use(
         const refreshToken = localStorage.getItem("refreshToken");
 
         const response = await axios.post(
-          `${process.env.BASE_URL}/refresh-token`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/refresh-token`,
           {
             token: refreshToken,
           }
@@ -59,3 +59,10 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
+export const axiosUser = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_USER_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});

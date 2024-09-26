@@ -30,16 +30,20 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!process.env.JWT_SECRET) {
+    if (!process.env.NEXT_PUBLIC_JWT_SECRET) {
       return NextResponse.json(
         { msg: "JWT secret is not set" },
         { status: 500 }
       );
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.NEXT_PUBLIC_JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     const cookie = serialize("token", token, {
       httpOnly: true,

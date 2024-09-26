@@ -1,16 +1,16 @@
-"use client";
+import ProductService from "@/services/product.service";
+import ProductList from "../components/product";
 
-import React from "react";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
+export default async function ProductsPage({ params }: { params: object }) {
+  try {
+    const response = await ProductService.getListOfProduct(params);
+    const listOfProduct = response.data.products;
+    const total = response.data.total;
+    const limit = response.data.limit;
 
-export default function ProductsPage() {
-  return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Products</Breadcrumb.Item>
-      </Breadcrumb>
-      Products Page
-    </div>
-  );
+    return <ProductList products={listOfProduct} total={total} limit={limit} />;
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+    return <div>Error loading products</div>;
+  }
 }
