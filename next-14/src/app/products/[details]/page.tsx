@@ -1,17 +1,29 @@
 "use client";
 
-import React from "react";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
+import ProductService from "@/services/product.service";
+import Product from "@/app/components/product/detail";
+import { useEffect, useState } from "react";
+import { IProducts } from "@/types/product.type";
 
-export default function ProductsDetail() {
-  return (
-    <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href="/products">Products</Breadcrumb.Item>
-        <Breadcrumb.Item active>Product Detail</Breadcrumb.Item>
-      </Breadcrumb>
-      this is product detail
-    </div>
-  );
+export default function ProductDetailPage({ params }: any) {
+  const [productDetail, setProductDetail] = useState<IProducts>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (params.details) {
+          const response = await ProductService.getProductDetail(
+            params.details
+          );
+          setProductDetail(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch product details:", error);
+      }
+    };
+
+    fetchData();
+  }, [params.details]);
+
+  return <Product productDetail={productDetail} />;
 }

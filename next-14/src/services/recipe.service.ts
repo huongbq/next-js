@@ -1,11 +1,5 @@
-import axios, { AxiosResponse } from "axios";
-
-export const axiosUser = axios.create({
-  baseURL: process.env.URL_USER,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { axiosUser } from "@/utils/axiosInstance";
+import { AxiosResponse } from "axios";
 
 const RecipeServices = {
   getUsers(params: object = {}): Promise<AxiosResponse<any>> {
