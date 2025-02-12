@@ -3,16 +3,11 @@
 import { IProducts, ProductListProps } from "@/types/product.type";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { Card } from "react-bootstrap";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Badge, Card, Breadcrumb, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 
-const ProductList: React.FC<ProductListProps> = ({
-  products,
-  total,
-  limit,
-}) => {
+const ProductList: React.FC<ProductListProps> = ({ products }) => {
   const router = useRouter();
   const renderStars = (rating: number) => {
     const stars = [];
@@ -44,7 +39,7 @@ const ProductList: React.FC<ProductListProps> = ({
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item active>Products</Breadcrumb.Item>
       </Breadcrumb>
-      <div className="grid grid-cols-4 gap-3 mt-5">
+      <div className="grid grid-cols-5 gap-5 mt-5">
         {products.map((product: IProducts) => (
           <Card
             key={product.id}
@@ -52,11 +47,28 @@ const ProductList: React.FC<ProductListProps> = ({
             style={{ width: "18rem" }}
             className="mb-2 cursor-pointer">
             <Card.Header className="truncate">{product.title}</Card.Header>
+            <Badge
+              bg="danger"
+              className="absolute right-[-30px] top-[-22px] p-3 rounded-full">
+              {product.discountPercentage}%
+            </Badge>
             <Card.Body>
               <Card.Img src={product.thumbnail} alt="image" />
-              <div className="flex justify-between border-t pt-3">
-                <Card.Text className="text-xl font-bold text-center">
-                  $ {product.price}
+              <div className="flex justify-between items-center border-t pt-3">
+                <Card.Text className="text-base font-bold text-center">
+                  <h4 className="truncate">
+                    <strong>
+                      $
+                      {(
+                        product.price -
+                        (product.price * product.discountPercentage) / 100
+                      ).toFixed(2)}
+                    </strong>{" "}
+                    -{" "}
+                    <span className="text-muted">
+                      <del>${product.price}</del>
+                    </span>{" "}
+                  </h4>
                 </Card.Text>
                 <Card.Text>{renderStars(product.rating)}</Card.Text>
               </div>
@@ -64,10 +76,19 @@ const ProductList: React.FC<ProductListProps> = ({
           </Card>
         ))}
       </div>
-      <div className="flex justify-around mt-10">
-        <h1 className="text-2xl font-bold">Total Products: {total}</h1>
-        <h1 className="text-2xl font-bold">Limit: {limit}</h1>
-      </div>
+      <Pagination className="mt-4 flex justify-center">
+        <Pagination.First />
+        <Pagination.Prev />
+        <Pagination.Item>{1}</Pagination.Item>
+        <Pagination.Ellipsis />
+
+        <Pagination.Item active>{5}</Pagination.Item>
+
+        <Pagination.Ellipsis />
+        <Pagination.Item>{10}</Pagination.Item>
+        <Pagination.Next />
+        <Pagination.Last />
+      </Pagination>
     </div>
   );
 };
