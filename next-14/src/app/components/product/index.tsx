@@ -2,36 +2,14 @@
 
 import { IProducts, ProductListProps } from "@/types/product.type";
 import { useRouter } from "next/navigation";
-import React from "react";
-import { Badge, Card, Breadcrumb, Pagination } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import { Badge, Card, Breadcrumb } from "react-bootstrap";
+import { renderStars } from "@/components/Star";
+import FormPagination from "@/components/Paginations";
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
   const router = useRouter();
-  const renderStars = (rating: number) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i <= rating) {
-        stars.push(
-          <FontAwesomeIcon key={i} icon={faStar} className="text-yellow-500" />
-        );
-      } else if (i - rating < 1) {
-        stars.push(
-          <FontAwesomeIcon
-            key={i}
-            icon={faStarHalfAlt}
-            className="text-yellow-500"
-          />
-        );
-      } else {
-        stars.push(
-          <FontAwesomeIcon key={i} icon={faStar} className="text-gray-300" />
-        );
-      }
-    }
-    return stars;
-  };
+  const [totalPages, setTotalPages] = useState(1);
 
   return (
     <div className="p-5">
@@ -76,19 +54,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
           </Card>
         ))}
       </div>
-      <Pagination className="mt-4 flex justify-center">
-        <Pagination.First />
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Ellipsis />
-
-        <Pagination.Item active>{5}</Pagination.Item>
-
-        <Pagination.Ellipsis />
-        <Pagination.Item>{10}</Pagination.Item>
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
+      <FormPagination totalPages={totalPages} />
     </div>
   );
 };
